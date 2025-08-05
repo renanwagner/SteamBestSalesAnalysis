@@ -1,110 +1,76 @@
 # 🎮 Steam Best-Selling Games Data Analysis
 
-This project focuses on **data cleaning**, **feature engineering**, **exploratory analysis**, **correlation mapping**, and **basic statistical modeling** of best-selling games available on the Steam platform. The analysis aims to uncover relationships between variables such as price, downloads, ratings, tags, generation, and revenue.
+Análise completa dos jogos mais vendidos na plataforma Steam. Este projeto envolve **tratamento de dados**, **engenharia de atributos**, **análises estatísticas**, **modelagem exploratória** e **visualizações de dados**.
+
+> 💡 Foco: entender os fatores que influenciam preço, receita, downloads e avaliações — usando dados reais de mercado.
 
 ---
 
-## 📁 Project Structure
+## 🧠 O que aprendi
 
-### `treatment.py`
-This script is responsible for **cleaning and preparing the general dataset** (`bestSelling_games.csv`) for analysis. It includes:
+Durante o desenvolvimento deste projeto, aprofundei meu conhecimento nas seguintes áreas:
 
-- Parsing and extracting fields from the release date.
-- Creating new features like:
-  - `generation` (based on console release periods),
-  - `main_tag` (first tag),
-  - `main_feature` (first listed feature).
-- Scaling numerical values using **MinMaxScaler**.
-- Label encoding categorical variables (`developer`, `tag`, `feature`, `OS`).
-- Computing derived metrics such as `total_revenue_million`.
-- Converting reviews/downloads to thousands for readability.
-- Saving the treated dataset to `bestSelling_treated.csv`.
+- **Limpeza e engenharia de dados:** criação de variáveis, normalização e encoding.
+- **Visualização de dados:** construção de gráficos com Matplotlib e Seaborn.
+- **Modelagem estatística básica:** regressões lineares para identificar correlações entre métricas-chave.
+- **Análise comparativa:** separação de jogos com receita positiva para avaliar distorções em dados brutos.
 
 ---
 
-### `treatment_receipt.py`
-This script performs the **same treatment pipeline** as `treatment.py`, but **filters only the games with non-zero revenue** before proceeding.
+## 🛠️ Tecnologias utilizadas
 
-- It creates a version of the dataset that includes **only financially successful games**.
-- This allows focused analysis on **monetized titles**.
-- The output is saved as `bestSelling_treated_receipt.csv`.
-
----
-
-### `basic_math_statistics.py`
-Performs **statistical modeling and linear regression** based on the full dataset (`bestSelling_treated.csv`). It includes:
-
-- Multiple regressions to explore:
-  - Downloads prediction from review metrics.
-  - Correlation between critic and user ratings.
-  - Price vs. duration and other features.
-- Calculation of:
-  - **R² score** to assess model performance.
-  - **RMSE** to evaluate model error.
-- Conclusions and interpretations for business relevance (e.g., generation-year correlation, pricing trends).
-
-> 📌 This script is **exploratory** and does not change the dataset.
+- **Linguagem:** Python 3.10+
+- **Bibliotecas:**  
+  - `pandas`, `numpy` – manipulação e análise de dados  
+  - `scikit-learn` – escalonamento e regressão linear  
+  - `matplotlib`, `seaborn`, `plotly` – visualizações  
+- **Ambiente:** Jupyter Notebook / VS Code
 
 ---
 
-### `basic_math_statistics_receipt.py`
-A receipt-specific version of the regression script:
+## 📁 Estrutura do Projeto
 
-- Uses `bestSelling_treated_receipt.csv` as input.
-- Repeats the regressions but **removes free or zero-revenue games**.
-- Helps to eliminate bias from non-monetized products and sharpen revenue-based insights.
-
----
-
-### `visualization.py`
-Generates a wide variety of **static visualizations** using **Matplotlib** and **Seaborn**:
-
-- **Histograms** for price, downloads, rating, etc.
-- **Count plots** for year and generation distributions.
-- **Correlation heatmaps** between scaled variables.
-- **Boxplots** and **violin plots** for rating, price, revenue per genre/generation.
-- **Crosstab heatmaps** for year vs tag, feature, and age restriction.
-- **Scatter plots** showing price vs downloads, and other relationships.
-
-These visualizations are essential for understanding trends and relationships in the full dataset.
+| Arquivo | Descrição |
+|--------|----------|
+| `treatment.py` | Tratamento completo dos dados brutos: limpeza, criação de variáveis, escalonamento e encoding |
+| `treatment_receipt.py` | Mesmo processo, mas **somente para jogos com receita > 0** |
+| `basic_math_statistics.py` | Regressões lineares e modelagens sobre o dataset completo |
+| `basic_math_statistics_receipt.py` | Versão da modelagem focada apenas em jogos monetizados |
+| `visualization.py` | Geração de gráficos estáticos e interativos para análise exploratória |
+| `visualization_receipt.py` | Visualizações filtradas para títulos com receita |
 
 ---
 
-### `visualization_receipt.py`
-A specialized version of the `visualization.py` script that uses only **games with non-zero revenue**:
+## 📊 Conjunto de Dados
 
-- Helps visualize market patterns more realistically.
-- Highlights pricing, downloads, and revenue trends for monetized games.
-- Useful for business analysis and identifying potential outliers or top performers.
-
----
-
-## 📦 Dataset
-
-### `bestSelling_games.csv`
-The **original dataset** containing all games, with fields such as:
-
-- `game_name`, `price`, `rating`, `length`, `estimated_downloads`, `reviews_like_rate`, `release_date`, `user_defined_tags`, etc.
-
-### `bestSelling_treated.csv`
-The **cleaned and feature-engineered version** of the dataset produced by `treatment.py`.
-
-- Includes new columns such as `total_revenue_million`, `generation`, `main_tag`, `main_feature`, and MinMax-scaled features.
-
-### `bestSelling_treated_receipt.csv`
-A **filtered version** of the treated dataset containing only games with a revenue greater than 0.
-
-- Generated by `treatment_receipt.py`.
-- Designed for focused financial and business analysis.
+- **`bestSelling_games.csv`** – Dados brutos: nome, preço, downloads, data de lançamento, tags, avaliações, etc.
+- **`bestSelling_treated.csv`** – Dados tratados: novas colunas como `generation`, `main_tag`, `total_revenue_million`, escalonamento.
+- **`bestSelling_treated_receipt.csv`** – Apenas jogos com receita positiva (para análises de mercado mais precisas).
 
 ---
 
-## 📊 Key Technologies
+## 📌 Como executar
 
-- **Python 3.10+**
-- **Pandas**
-- **NumPy**
-- **Scikit-learn**
-- **Matplotlib**
-- **Seaborn**
-- **Plotly**
+1. Clone o repositório:
+   ```bash
+   git clone https://github.com/renanwagner/SteamBestSalesAnalysis.git
+
+2. Instale as dependências:
+   ```bash
+   pip install -r requirements.txt
+
+3. Execute os scripts principais na ordem desejada
+- treatment.py ou treatment_receipt.py
+- visualization.py ou visualization_receipt.py
+- basic_math_statistics.py ou basic_math_statistics_receipt.py
+
+📬 Contato
+----------
+
+Quer bater um papo, trocar ideias ou colaborar em algum projeto? Estou à disposição!
+
+- ✉️ **E-mail:** renanwagner1112@gmail.com  
+- 🔗 **LinkedIn:** [renan-wagner](https://www.linkedin.com/in/renan-wagner-b37b2a29a/)  
+- 📁 **Portfólio no GitHub:** [github.com/renanwagner](https://github.com/renanwagner)
+
+Projeto realizado como parte do meu processo de formação em Análise de Dados, com foco em prática, documentação e storytelling baseado em dados.
