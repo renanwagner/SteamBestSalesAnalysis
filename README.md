@@ -74,3 +74,4 @@ Quer bater um papo, trocar ideias ou colaborar em algum projeto? Estou à dispos
 - 📁 **Portfólio no GitHub:** [github.com/renanwagner](https://github.com/renanwagner)
 
 Projeto realizado como parte do meu processo de formação em Análise de Dados, com foco em prática, documentação e storytelling baseado em dados.
+Essa análise foi baseada em um banco de dados já existente com a seguinte licença:https://creativecommons.org/licenses/by-sa/4.0/
